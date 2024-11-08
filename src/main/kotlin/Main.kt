@@ -1,5 +1,7 @@
 package com.akryvtsun
 
+import java.time.LocalDate
+
 
 fun main() {
     val postcrossers = GoogleSheetSupplier(
@@ -11,4 +13,12 @@ fun main() {
 
     println("Size: ${postcrossers.size}")
     println(postcrossers)
+
+    val birthdays = postcrossers.filter { isToday(it.birthday) }
+    println(birthdays)
+}
+
+fun isToday(date: LocalDate): Boolean {
+    val today = LocalDate.now()
+    return date.month == today.month && date.dayOfMonth == today.dayOfMonth
 }
