@@ -1,9 +1,9 @@
 plugins {
+    jacoco
     kotlin("jvm") version "2.0.20"
 }
 
-group = "com.akryvtsun"
-version = "1.0-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -17,8 +17,19 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    test {
+        useJUnitPlatform()
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
+
+        reports {
+            xml.required = true
+        }
+    }
 }
 kotlin {
     jvmToolchain(17)
