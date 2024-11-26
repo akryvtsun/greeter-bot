@@ -3,7 +3,8 @@ package com.akryvtsun
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
 import com.google.api.services.sheets.v4.Sheets
 import com.google.common.base.Supplier
-import java.io.FileInputStream
+import java.io.ByteArrayInputStream
+import java.io.InputStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
@@ -20,7 +21,8 @@ class GoogleSheetSupplier(
 
     override fun get(): List<Postcrosser> {
         // Authenticate using the service account
-        val credential = GoogleCredential.fromStream(FileInputStream("google-credential.json"))
+        val textCredential = System.getenv("GOOGLE_SHEETS_CREDS")
+        val credential = GoogleCredential.fromStream(stringToInputStream(textCredential))
             .createScoped(listOf("https://www.googleapis.com/auth/spreadsheets.readonly"))
 
         // Build the Sheets API client
@@ -62,5 +64,9 @@ class GoogleSheetSupplier(
                 Postcrosser(birthday, name, username)
             }
             .toList()
+    }
+
+    private fun stringToInputStream(input: String): InputStream {
+        return ByteArrayInputStream(input.toByteArray(Charsets.UTF_8))
     }
 }
