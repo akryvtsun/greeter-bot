@@ -23,6 +23,8 @@ tasks {
     test {
         useJUnitPlatform()
         finalizedBy(jacocoTestReport)
+        // Pass all system properties to the test JVM
+        systemProperties = System.getProperties().map { it.key.toString() to it.value }.toMap()
     }
 
     jacocoTestReport {
