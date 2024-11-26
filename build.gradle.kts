@@ -15,6 +15,8 @@ dependencies {
     implementation("com.google.apis:google-api-services-sheets:v4-rev493-1.23.0")
 
     testImplementation(kotlin("test"))
+    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
 tasks {
