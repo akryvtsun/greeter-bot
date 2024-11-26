@@ -21,7 +21,7 @@ class GoogleSheetSupplier(
 
     override fun get(): List<Postcrosser> {
         // Authenticate using the service account
-        val textCredential = System.getenv("GOOGLE_SHEETS_CREDS")
+        val textCredential = System.getenv("GOOGLE_SHEETS_CRED")
         val credential = GoogleCredential.fromStream(stringToInputStream(textCredential))
             .createScoped(listOf("https://www.googleapis.com/auth/spreadsheets.readonly"))
 
