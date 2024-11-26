@@ -31,6 +31,3 @@ tasks {
         }
     }
 }
-kotlin {
-    jvmToolchain(17)
-}
