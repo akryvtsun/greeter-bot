@@ -4,10 +4,8 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    name: Build with code coverage
+    name: Build with Code Coverage
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
